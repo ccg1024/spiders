@@ -13,6 +13,7 @@ from typing import Any
 import requests
 from lxml import etree
 from requests.exceptions import RequestException
+from requests.models import Response
 
 
 class Crawl:
@@ -68,7 +69,7 @@ class Crawl:
         self.session.close()
         print('[I] Create a new session object')
 
-    def get(self, url, **kwargs):
+    def get(self, url, **kwargs) -> Response:
         """
         Get function of requests module.
 
@@ -79,7 +80,8 @@ class Crawl:
 
         RETURN:
 
-        response
+        response, which could be a none object of Response. Using status_code
+        can check whether have contents.
 
         """
         try:
@@ -87,10 +89,9 @@ class Crawl:
             return res
         except RequestException as error_handle:
             print(error_handle)
-            return None
-        # return requests.get(url, headers=self.headers, **kwargs)
+            return Response()
 
-    def post(self, url, **kwargs):
+    def post(self, url, **kwargs) -> Response:
         """
         Post function of requests module.
 
@@ -104,14 +105,14 @@ class Crawl:
             return res
         except RequestException as error_handle:
             print(error_handle)
-            return None
+            return Response()
         # return requests.post(url, headers=self.headers, **kwargs)
 
     @staticmethod
-    def _xpath(doc: Any, xpath: str = None):
+    def _xpath(doc: Any, xpath: str = ""):
         """ Perform xpath analysis on the acquired data. """
         assert doc is not None, 'the param \'doc\' should not be None.'
-        assert isinstance(doc, [str, bytes]), '[W] Can not recognize the type of param \'doc\''
+        assert isinstance(doc, (str, bytes)), '[W] Can not recognize the type of param \'doc\''
         assert isinstance(xpath, str), 'the param \'xpath\' should be str.'
 
         if isinstance(doc, str):
@@ -123,7 +124,7 @@ class Crawl:
         # return result
         return etree_obj.xpath(xpath)
 
-    def json_crawl(self, doc: str = None, url: str = None, _key: str = None):
+    def json_crawl(self, doc: str = "", url: str = "", _key: str = ""):
         """
         For crawling and formatting json data. it can receive dde string object returned by 
         Response, or it can get the json data through the 'url'.
@@ -138,14 +139,14 @@ class Crawl:
                    : key-value pairs data of json. Default=None
 
         """
-        json_result = None
-        if doc is not None:
+        json_result = {}
+        if doc != "":
             json_result = json.loads(doc)
-        elif url is not None:
+        elif url != "":
             response = self.get(url)
             json_result = json.loads(response.text)
 
-        if _key is not None:
+        if _key != "":
             return json_result[_key]
         return json_result
 

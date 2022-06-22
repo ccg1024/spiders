@@ -93,7 +93,7 @@ def api_func(key_words, crawl, page=1, file_order=None, file_type=None):
 # display input information
 def input_control(first_word):
     """
-    controllor of input
+    controller of input
     """
     if first_word is not None:
         key_words = first_word
@@ -105,7 +105,7 @@ def input_control(first_word):
 
 def option_control(page_num, total_page):
     """
-    controllor of options
+    controller of options
     """
     # option control
     console_options = "page:{}/{};  [r] search new;  [e] exit;".format(page_num, total_page)
