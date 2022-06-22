@@ -12,6 +12,7 @@ import os
 from typing import Any
 import requests
 from lxml import etree
+from lxml.etree import _Element
 from requests.exceptions import RequestException
 from requests.models import Response
 
@@ -112,7 +113,8 @@ class Crawl:
     def _xpath(doc: Any, xpath: str = ""):
         """ Perform xpath analysis on the acquired data. """
         assert doc is not None, 'the param \'doc\' should not be None.'
-        assert isinstance(doc, (str, bytes)), '[W] Can not recognize the type of param \'doc\''
+        assert isinstance(doc, (str, bytes, _Element)), \
+        '[W] Can not recognize the type of param \'doc\' {}'.format(type(doc))
         assert isinstance(xpath, str), 'the param \'xpath\' should be str.'
 
         if isinstance(doc, str):
