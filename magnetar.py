@@ -26,7 +26,7 @@ import argparse
 
 
 # add command
-parser = argparse.ArgumentParser(description='crawl magnet through api: https://api.magnetar.cc')
+parser = argparse.ArgumentParser(description='crawl magnet through xxxxxxxxxxxxxxxxxxxxxxxxxxxx')
 parser.add_argument('-v', '--version', help='show the script version', action='store_true')
 parser.add_argument('-w', '--word', help='search word, when run the script')
 parser.add_argument('-t', '--type', help='the type of source shown, all; video; img; compress;'
@@ -56,7 +56,7 @@ def api_func(key_words, crawl, page=1, file_order=None, file_type=None):
     # m stands for sorting, t stands for type
     file_order = str(file_order) if file_order is not None else 'time'
     file_type = str(file_type) if file_type is not None else 'video'
-    url = f'https://api.magnetar.cc/search/v2.index/search?q={key_words}&m={file_order}&' \
+    url = f'xxxxx:xxxxx.xxxxxxxx.xx/xxxxxx/xx.xxxx/xxxxxxx?q={key_words}&m={file_order}&' \
           f't={file_type}&p={page}'
  
     # obtains response source

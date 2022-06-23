@@ -110,7 +110,7 @@ class Crawl:
         # return requests.post(url, headers=self.headers, **kwargs)
 
     @staticmethod
-    def _xpath(doc: Any, xpath: str = ""):
+    def xpath__(doc: Any, xpath: str = ""):
         """ Perform xpath analysis on the acquired data. """
         assert doc is not None, 'the param \'doc\' should not be None.'
         assert isinstance(doc, (str, bytes, _Element)), \
