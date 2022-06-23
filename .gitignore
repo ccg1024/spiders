@@ -1,5 +1,7 @@
 /__pycache__
 /source
+/.vimsession
+/.idea
 
 .DS_Store
 test_api.py
