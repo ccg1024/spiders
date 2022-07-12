@@ -37,7 +37,7 @@ class Crawl:
         """
         return self.headers
 
-    def add_headers_elem(self, key, value) -> None:
+    def add_headers_elem(self, key: str="", value: str="") -> None:
         """
         Add headers key-value pairs.
 
@@ -47,10 +47,14 @@ class Crawl:
         param value : string object
 
         """
+        assert key == "", "the `key` param should not be a empty string"
+        if value == "":
+            print("[Info] the `value` param is a empty string")
+
         self.headers[key] = value
         print(f'[I] Add elem \'{key}\':\'{value}\'')
 
-    def change_headers(self, headers):
+    def change_headers(self, headers: dict):
         """
         Modify the headers object.
 
@@ -128,17 +132,18 @@ class Crawl:
 
     def json_crawl(self, doc: str = "", url: str = "", _key: str = ""):
         """
-        For crawling and formatting json data. it can receive dde string object returned by 
-        Response, or it can get the json data through the 'url'.
+        For crawling and formatting json data. it can receive dde string object
+        returned by Response, or it can get the json data through the 'url'.
         
         ARGS:
 
-        param doc  : format json data from string. if not empty, the 'doc' param will be processed
-                   : first and the value of 'url' param will be ignored. Default=None
-        param url  : the url address for crawling json data. the address will be searched only when
-                   : the 'doc' param is None. Default=None
-        param _key : after formatting json data, the '_key' param will be use when just need one
-                   : key-value pairs data of json. Default=None
+        param doc  : format json data from string. if not empty, the 'doc' param will
+                   : be processed first and the value of 'url' param will be ignored.
+                   : Default=None
+        param url  : the url address for crawling json data. the address will be
+                   : searched only when the 'doc' param is None. Default=None
+        param _key : after formatting json data, the '_key' param will be use when
+                   : just need one key-value pairs data of json. Default=None
 
         """
         json_result = {}
@@ -153,20 +158,21 @@ class Crawl:
         return json_result
 
     @staticmethod
-    def save(contents, file_prefix: str = 'saved', file_suffix: str = '.jpg', file_dir: str = './',
-            mode: str = 'wb', is_url: bool = False):
+    def save(contents, file_prefix: str = 'saved', file_suffix: str = '.jpg',
+             file_dir: str = './', mode: str = 'wb', is_url: bool = False):
         """
         Store the obtained content in a file.
 
         ARGS:
         
-        param contents     : the content stored in the file, or the URL to get the content, used with
-                           : 'is_url' param
+        param contents     : the content stored in the file, or the URL to get the
+                           : content, used with 'is_url' param
         param file_prefix  : stored filename prefix. Default=saved
         param file_suffix  : stored filename suffix. Default=.jpg
         param file_dir     : the folder path where the file is stored. Default=./
         param mode         : the mode in which the file is stored
-        param is_url       : determines whether the 'contents' param is a URL. Default=False
+        param is_url       : determines whether the 'contents' param is a URL.
+                           : Default=False
 
         """
 
@@ -186,7 +192,8 @@ class Crawl:
 
     def __call__(self) -> Any:
         """
-        when the object of class Crawl is used as a function, this inner function will be use.
+        when the object of class Crawl is used as a function, this inner function
+        will be use.
 
         """
         print("using the inner function \'__call__()\'")

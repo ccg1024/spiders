@@ -14,7 +14,7 @@ PAGE_URL = ''
 PROFIX_URL = ''
 
 
-def search_info(url: str = None, keywords: str = None) -> list:
+def search_info(url: str = "", keywords: str = "") -> list:
     """
     Search keyword information from the page which url indicating.
 
@@ -22,8 +22,7 @@ def search_info(url: str = None, keywords: str = None) -> list:
     : param keywords : the keywords which use to search. use space to split
     :                : multi-key. Default is None.
     """
-    assert url is not None, "Maybe need to put a url."
-
+    assert url != "", "Maybe need to put a url."
     # initial return obj
     res_list = []
 
@@ -50,7 +49,8 @@ def search_info(url: str = None, keywords: str = None) -> list:
     # using re to match special item
     pat_str = r'.*?'
 
-    keywords_list = keywords.split(" ") if keywords is not None and keywords != "" else []
+    keywords_list = keywords.split(" ") if keywords is not None \
+        and keywords != "" else []
     if len(keywords_list) > 0:
         for item in keywords_list:
             pat_str += item + ".*?"
@@ -107,7 +107,8 @@ def save_info(source_obj: list, save_path: str = "source") -> None:
             print("begin crawl anime: ", source_dict['img_name'])
             os.makedirs(anime_path)
         else:
-            keyword = input("anime {} is already exist, need rewrite?[y/n]".format(source_dict['img_name']))
+            keyword = input("anime {} is already exist, need rewrite?[y/n]".format(
+                source_dict['img_name']))
             if keyword == "y":
                 print("redonwload anime: ", source_dict['img_name'])
             else:
@@ -127,3 +128,4 @@ def save_info(source_obj: list, save_path: str = "source") -> None:
 if __name__ == "__main__":
     info = search_info(PAGE_URL.format(str(1)), "")
     save_info(info, "./source/img")
+    
